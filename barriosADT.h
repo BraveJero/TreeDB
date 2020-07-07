@@ -7,7 +7,7 @@
 typedef struct barriosCDT * barriosADT;
 
 // Crea un CDT vacio, es decir sin ningun barrio cargado
-barriosADT newBarrio();
+barriosADT newBarrio(void);
 
 // Libera los recursos reservados por el TAD
 void freeBarrio(barriosADT ciudad);
