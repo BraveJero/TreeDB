@@ -34,7 +34,11 @@ void toBegin(barriosADT ciudad);
 // Indica si hay un siguiente barrio o no
 int hasNext(barriosADT ciudad);
 
-// Devuelve los datos del barrio actual
-void next(barriosADT ciudad, char ** nombre, size_t * cantArb, size_t * hab);
+/* Devuelve los datos del barrio actual (nombre, cantidad de arboles, cantidad de habitantes).
+** Si hab==NULL no devuelve la cantidad de habitantes. (Para query 1).
+** Retorna 1 si se pudieron devolver los datos.
+** -1 si la memoria no alcanzo. 
+** 0 si no hay mas datos. */
+int next(barriosADT ciudad, char ** nombre, size_t * cantArb, size_t * hab);
 
 #endif

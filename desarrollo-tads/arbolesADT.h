@@ -28,7 +28,10 @@ void toBegin(arbolesADT bosque);
 // Indica si hay un siguiente arbol o no, retorna 1 si hay, 0 si no.
 int hasNext(arbolesADT bosque);
 
-// Devuelve los datos del arbol actual. Retorna 1 si se pudieron devolver los datos, 0 si no hay mas datos, -1 si la memoria no alcanzo.
+/* Devuelve los datos del arbol actual. 
+** Retorna 1 si se pudieron devolver los datos.
+** 0 si no hay mas datos.
+** -1 si la memoria no alcanzo. */
 int next(arbolesADT bosque, char ** arbol, size_t * cantArb, double * diamAc);
 
 #endif

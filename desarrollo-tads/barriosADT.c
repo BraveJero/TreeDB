@@ -71,9 +71,9 @@ int hasNext(barriosADT ciudad){
   return (ciudad->current < ciudad->max);
 }
 
-void next(barriosADT ciudad, char ** nombre, size_t * cantArb, size_t * hab){
+int next(barriosADT ciudad, char ** nombre, size_t * cantArb, size_t * hab){
   if (!hasNext(ciudad))
-    return;
+    return 0;
 
   *nombre = realloc(*nombre, strlen(ciudad->barrios[ciudad->current].nombre));
   if (*nombre==NULL){
@@ -85,5 +85,5 @@ void next(barriosADT ciudad, char ** nombre, size_t * cantArb, size_t * hab){
   if (hab != NULL)
     *hab = ciudad->barrios[ciudad->current].hab;
   ciudad->current++;
-  return;
+  return 1;
 }
