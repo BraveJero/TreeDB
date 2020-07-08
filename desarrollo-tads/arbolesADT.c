@@ -17,12 +17,7 @@ typedef struct arbolesCDT{
 }arbolesCDT;
 
 arbolesADT newArbol(void){
-	arbolesADT bosque = calloc(1, sizeof(arbolesCDT));
-	if (bosque == NULL){
-    fprintf(stderr, "Espacio de memoria insuficiente.\n");
-    exit(1);
-  }
-	return bosque;
+	return calloc(1, sizeof(arbolesCDT));
 }
 
 void freeArbol(arbolesADT bosque){
@@ -39,27 +34,27 @@ static int getIndex(tArbol * arboles, char * arbol, size_t dim){
 	return -1;
 }
 
-void addArbol(arbolesADT bosque, char * arbol, size_t diam){
+int addArbol(arbolesADT bosque, char * arbol, size_t diam){
 	int index = getIndex(bosque->arboles, arbol, bosque->max);
 	if (index != -1){
 		bosque->arboles[index].cantArb++;
 		bosque->arboles[index].diamAc += diam;
-		return;
+		return 1;
 	}
 	bosque->arboles = realloc(bosque->arboles, sizeof(tArbol) * (bosque->max + 1));
 	if (bosque->arboles == NULL){
     fprintf(stderr, "Espacio de memoria insuficiente.\n");
-    exit(1);
+    return -1;
   }
 	bosque->arboles[bosque->max].nombre = malloc(sizeof(strlen(arbol)));
 	if (bosque->arboles[bosque->max].nombre == NULL){
     fprintf(stderr, "Espacio de memoria insuficiente.\n");
-    exit(1);
+    return -1;
   }
 	strcpy(bosque->arboles[bosque->max].nombre, arbol);
 	bosque->arboles[bosque->max].diamAc = diam;
 	bosque->max++;
-	return;
+	return 1;
 }
 
 void ordenDiam(arbolesADT bosque); // TO-DO
@@ -73,12 +68,17 @@ int hasNext(arbolesADT bosque){
 	return (bosque->current < bosque->max);
 }
 
-void next(arbolesADT bosque, char ** arbol, size_t * cantArb, double * diamAc){
+int next(arbolesADT bosque, char ** arbol, size_t * cantArb, double * diamAc){
 	if (!hasNext(bosque))
-		return;
-	// Ver si poner copia o devolver el original.
+		return 0;
+	*arbol=malloc(strlen(bosque->arboles[bosque->current].nombre)*(sizeof(char)));
+	if  (*arbol == NULL){
+    		fprintf(stderr, "Espacio de memoria insuficiente.\n");
+		return -1;
+	}
+	strcpy(*arbol, bosque->arboles[bosque->current].nombre); //Chequear. 
 	*cantArb = bosque->arboles[bosque->current].cantArb;
 	*diamAc = bosque->arboles[bosque->current].diamAc;
 	bosque->current++;
-	return;
+	return 1;
 }

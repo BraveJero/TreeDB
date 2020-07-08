@@ -15,7 +15,7 @@ void freeBarrio(barriosADT ciudad);
 /* Agrega un barrio con su cantidad de habitantes
 ** utilizaremos esta funcion para cargar la informacion de
 ** los archivos barriosBUE.csv y barriosVAN.csv */
-void addBarrio(barriosADT ciudad, const char * barrio, size_t hab);
+int addBarrio(barriosADT ciudad, const char * barrio, size_t hab);
 
 /* Agrega un arbol al barrio
 ** utilizaremos esta funcion para cargar la informacion de

@@ -33,22 +33,22 @@ void freeBarrio(barriosADT ciudad){
   return;
 }
 
-void addBarrio(barriosADT ciudad, const char * barrio, size_t hab){
+int addBarrio(barriosADT ciudad, const char * barrio, size_t hab){
   size_t pos = ciudad->max++;
   ciudad->barrios = realloc(ciudad->barrios, (ciudad->max) * sizeof(tBarrio));
   if (ciudad->barrios == NULL){
     fprintf(stderr, "Espacio de memoria insuficiente.\n");
-    exit(1);
+    return -1;
   }
   ciudad->barrios[pos].nombre = malloc(sizeof(char) * (strlen(barrio) + 1));
   if (ciudad->barrios[pos].nombre == NULL){
     fprintf(stderr, "Espacio de memoria insuficiente.\n");
-    exit(1);
+    return -1;
   }
   strcpy(ciudad->barrios[pos].nombre, barrio);
   ciudad->barrios[pos].cantArb = 0;
   ciudad->barrios[pos].hab = hab;
-  return;
+  return 1;
 }
 
 void addArbol(barriosADT ciudad, const char * barrio){
@@ -74,7 +74,7 @@ int hasNext(barriosADT ciudad){
 void next(barriosADT ciudad, char ** nombre, size_t * cantArb, size_t * hab){
   if (!hasNext(ciudad))
     return;
-  *nombre = ciudad->barrios[ciudad->current].nombre;
+  *nombre = ciudad->barrios[ciudad->current].nombre; //Hay que hacerlo con strcpy y alocar memoria.
   *cantArb = ciudad->barrios[ciudad->current].cantArb;
   if (hab != NULL)
     *hab = ciudad->barrios[ciudad->current].hab;
