@@ -74,7 +74,13 @@ int hasNext(barriosADT ciudad){
 void next(barriosADT ciudad, char ** nombre, size_t * cantArb, size_t * hab){
   if (!hasNext(ciudad))
     return;
-  *nombre = ciudad->barrios[ciudad->current].nombre; //Hay que hacerlo con strcpy y alocar memoria.
+
+  *nombre = realloc(*nombre, strlen(ciudad->barrios[ciudad->current].nombre));
+  if (*nombre==NULL){
+    fprintf(stderr, "Espacio de memoria insuficiente.\n");
+    return -1;
+  }
+  strcpy(*nombre, ciudad->barrios[ciudad->current].nombre);
   *cantArb = ciudad->barrios[ciudad->current].cantArb;
   if (hab != NULL)
     *hab = ciudad->barrios[ciudad->current].hab;
