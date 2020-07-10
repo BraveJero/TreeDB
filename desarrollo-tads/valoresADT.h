@@ -48,19 +48,19 @@ int hasNext(valoresADT datos);
 
 /* Devuelve los datos del barrio actual (nombre, cantidad de arboles, cantidad de habitantes).
 ** Retorna 1 si se pudieron devolver los datos.
-** -1 si la memoria no alcanzo.
+** Al guardar una COPIA de "nombre", retorna -1 si la memoria no alcanzo.
 ** 0 si no hay mas datos. */
 int nextCant(valoresADT datos, char ** nombre, size_t * cantArb, size_t * hab);
 
 /* Devuelve los datos del barrio actual (nombre, cantidad de arboles).
 ** Retorna 1 si se pudieron devolver los datos.
-** -1 si la memoria no alcanzo.
+** Al guardar una COPIA de "nombre", retorna -1 si la memoria no alcanzo.
 ** 0 si no hay mas datos. */
 int nextBarrio(valoresADT datos, char ** nombre, size_t * cantArb);
 
 /* Devuelve los datos del arbol actual (nombre, cantidad de arboles de esta especie).
 ** Retorna 1 si se pudieron devolver los datos.
-** -1 si la memoria no alcanzo.
+** Al guardar una COPIA de "nombre", retorna -1 si la memoria no alcanzo.
 ** 0 si no hay mas datos. */
 int nextArbol(valoresADT datos, char ** nombre, size_t * cantArb, double * diamAc);
 

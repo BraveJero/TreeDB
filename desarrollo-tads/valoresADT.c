@@ -11,7 +11,7 @@
 
 typedef struct tDato{
   char * nombre; // Nombre del barrio o arbol
-  void * versatil; // Diametro acumulado o habitantes
+  void * versatil; // Diametro acumulado o habitantes. Idea de Jeronimo ¯\_(ツ)_/¯
   size_t cantArb; // Cantidad de arboles en el barrio o de un cierto tipo
 }tDato;
 
@@ -72,8 +72,7 @@ static int addDato(valoresADT datos, char * rotulo, void * flex, char type){
     if (errno == ENOMEM){
       free(datos->valores[datos->max].nombre);
       datos->valores = realloc(datos->valores, sizeof(tDato) * (datos->max));
-      fprintf(stderr, "Espacio de memoria insuficiente.\n");
-      return -1;
+      return oomReturn();
     }
     *(size_t*)(datos->valores[datos->max].versatil) = *(size_t*)flex;
   }else {
@@ -82,8 +81,7 @@ static int addDato(valoresADT datos, char * rotulo, void * flex, char type){
     if (errno == ENOMEM){
       free(datos->valores[datos->max].nombre);
       datos->valores = realloc(datos->valores, sizeof(tDato) * (datos->max));
-      fprintf(stderr, "Espacio de memoria insuficiente.\n");
-      return -1;
+      return oomReturn();
     }
     *(double*)(datos->valores[datos->max].versatil) = *(double*)flex;
   }
@@ -153,10 +151,8 @@ static int next(valoresADT datos, char ** nombre, size_t * cantArb, void * flex,
     return 0;
   errno=0;
   *nombre = malloc(sizeof(char) * (strlen(datos->valores[datos->current].nombre) + 1));
-  if (errno == ENOMEM){
-    fprintf(stderr, "Espacio de memoria insuficiente.\n");
-    return -1;
-  }
+  if (errno == ENOMEM)
+    return oomReturn();
   strcpy(*nombre, datos->valores[datos->current].nombre);
   *cantArb = datos->valores[datos->current].cantArb;
   if (type == ARBOL)
@@ -178,3 +174,5 @@ int nextArbol(valoresADT datos, char ** nombre, size_t * cantArb, double * diamA
 int nextCant(valoresADT datos, char ** nombre, size_t * cantArb, size_t * hab){
   return next(datos, nombre, cantArb, hab, CANT);
 }
+
+// Fiu, mucho texto ;D
