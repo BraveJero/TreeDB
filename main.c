@@ -28,9 +28,9 @@ int main(int argc, char const *argv[]){
   errno = 0;
   FILE * barriosFile = fopen( argv[2], "r");
   FILE * arbolesFile = fopen( argv[1], "r");
-  FILE * query1 = fopen("resultados/query1.csv", "wt");
-  FILE * query2 = fopen("resultados/query2.csv", "wt");
-  FILE * query3 = fopen("resultados/query3.csv", "wt");
+  FILE * query1 = fopen("query1.csv", "wt");
+  FILE * query2 = fopen("query2.csv", "wt");
+  FILE * query3 = fopen("query3.csv", "wt");
   char aux[MAX_CHAR], * nombre, * habitantes, * diametro, * especie, * tok;
   valoresADT barrios = newValores(); // Aca alamacenamos barrios y sus respectiva cantidad de arboles y habitantes
   valoresADT arboles = newValores(); // Aca almacenamos arboles y sus respectivos diametros y cantidad
