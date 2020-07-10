@@ -33,7 +33,13 @@ int main(int argc, char const *argv[]){
   FILE * query3 = fopen("query3.csv", "wt");
   char aux[MAX_CHAR], * nombre, * habitantes, * diametro, * especie, * tok;
   valoresADT barrios = newValores(); // Aca alamacenamos barrios y sus respectiva cantidad de arboles y habitantes
+  if(barrios==NULL)
+    exit(1);
   valoresADT arboles = newValores(); // Aca almacenamos arboles y sus respectivos diametros y cantidad
+  if(arboles==NULL){
+    freeValores(barrios);
+    exit(1);
+  }
 
   // Hacemos una unica pasada al archivo de barrios, y guardamos todo en el TAD para procesarlo despues
   fgets(aux, MAX_CHAR, barriosFile);

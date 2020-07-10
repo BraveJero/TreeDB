@@ -23,7 +23,13 @@ typedef struct valoresCDT{
 }valoresCDT;
 
 valoresADT newValores(){
-  return calloc(1, sizeof(valoresCDT));
+  errno=0;
+  valoresADT nuevo = calloc(1, sizeof(valoresCDT));
+  if(errno==ENOMEM){
+    fprintf(stderr, "Espacio de memoria insuficiente.\n");
+    return NULL;
+  }
+  return nuevo;
 }
 
 void freeValores(valoresADT datos){
