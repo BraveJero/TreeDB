@@ -5,6 +5,7 @@
 #include "desarrollo-tads/valoresADT.h"
 #define MAX_CHAR 250
 #define DELIM ";"
+#define SIG_FIGURES 100 // 10 ^ n donde n es la cantidad de sifras significativas deseadas.
 
 #ifdef VAN
 
@@ -71,7 +72,7 @@ int main(int argc, char const *argv[]){
   toBegin(barrios);
   while(hasNext(barrios)){
     nextCant(barrios, &nombre, &cant, &hab);
-    fprintf(query2, "%s;%2.2g\n", nombre, cant/(double)hab);
+    fprintf(query2, "%s;%g\n", nombre, ((int)((cant/(double)hab)*SIG_FIGURES)/(float)SIG_FIGURES));
     free(nombre);
   }
 
@@ -81,7 +82,7 @@ int main(int argc, char const *argv[]){
   double diamAc;
   while(hasNext(arboles)){
     nextArbol(arboles, &especie, &cant, &diamAc);
-    fprintf(query3, "%s;%2.2g\n", especie, diamAc/cant);
+    fprintf(query3, "%s;%g\n", especie, ((int)((diamAc/cant)*SIG_FIGURES))/(float)SIG_FIGURES);
     free(especie);
   }
 

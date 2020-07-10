@@ -117,7 +117,7 @@ void ordenBarrio(valoresADT datos){
 
 static int comparaArbol(tDato * dato1, tDato * dato2){
     int resp;
-    if((resp=((int)(((*(double*)(dato2->versatil)) /(double) dato2->cantArb)*SIG_FIGURES)) - ((int)(((*(double*)(dato1->versatil)) / (double)dato1->cantArb)*SIG_FIGURES))) == 0)
+    if((resp=((int)(((*(double*)(dato2->versatil)) / dato2->cantArb)*SIG_FIGURES)) - ((int)(((*(double*)(dato1->versatil)) / dato1->cantArb)*SIG_FIGURES))) == 0)
         return strcmp(dato1->nombre, dato2->nombre);
     return resp;
 }
@@ -129,7 +129,7 @@ void ordenArbol(valoresADT datos){
 
 static int comparaCant(tDato * dato1, tDato * dato2){
     int resp;
-    if((resp=(((int)(dato2->cantArb / (double)(*(size_t*)(dato2->versatil)))*SIG_FIGURES)) - ((int)((dato1->cantArb / (double)(*(size_t*)(dato1->versatil)))*SIG_FIGURES))) == 0)
+    if((resp=(int)((dato2->cantArb / (double)(*(size_t*)(dato2->versatil))) * SIG_FIGURES) - (int)((dato1->cantArb / (double)(*(size_t*)(dato1->versatil)))*SIG_FIGURES)) == 0)
         return strcmp(dato1->nombre, dato2->nombre);
     return resp;
 }
