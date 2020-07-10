@@ -7,7 +7,7 @@
 #define BARRIO 0
 #define CANT 1
 #define ARBOL 2
-#define EPSILON 0.01
+#define SIG_FIGURES 100 // 10 ^ n donde n es la cantidad de sifras significativas deseadas.
 
 typedef struct tDato{
   char * nombre; // Nombre del barrio o arbol
@@ -45,10 +45,10 @@ static int addDato(valoresADT datos, char * rotulo, void * flex, char type){
   errno=0;
   for (size_t i = 0; i < datos->max; i++){
     if (!strcmp(datos->valores[i].nombre, rotulo)){
-      if (type == BARRIO)  //Retorna 0 si se trata de agregar un barrio ya existente. 
+      if (type == BARRIO)  //Retorna 0 si se trata de agregar un barrio ya existente.
         return 0;
       if (type == ARBOL) //Aumenta el diametro acumulado del tipo de arbol "rotulo"
-        *(double*)(datos->valores[i].versatil) += *(double*)flex; 
+        *(double*)(datos->valores[i].versatil) += *(double*)flex;
       datos->valores[i].cantArb++; //En ambos casos restantes agrego un arbol a la cantidad.
       return 1; //Ya encontre mi palabra, realice los cambios, asi que retorno 1.
     }
@@ -116,10 +116,10 @@ void ordenBarrio(valoresADT datos){
 }
 
 static int comparaArbol(tDato * dato1, tDato * dato2){
-    float resp;
-    if((resp=((*(double*)(dato2->versatil)) / dato2->cantArb) - ((*(double*)(dato1->versatil)) / dato1->cantArb)) < EPSILON && resp > -EPSILON)
+    int resp;
+    if((resp=((int)(((*(double*)(dato2->versatil)) /(double) dato2->cantArb)*SIG_FIGURES)) - ((int)(((*(double*)(dato1->versatil)) / (double)dato1->cantArb)*SIG_FIGURES))) == 0)
         return strcmp(dato1->nombre, dato2->nombre);
-    return (resp<0 ? -1 : 1); //No puede ser "return resp;" ya que en el caso que resp==-0.1 (int)resp>0;
+    return resp;
 }
 
 void ordenArbol(valoresADT datos){
@@ -128,10 +128,10 @@ void ordenArbol(valoresADT datos){
 }
 
 static int comparaCant(tDato * dato1, tDato * dato2){
-    float resp;
-    if((resp=(dato2->cantArb / (double)(*(size_t*)(dato2->versatil))) - (dato1->cantArb / (double)(*(size_t*)(dato1->versatil)))) < EPSILON && resp > -EPSILON)
+    int resp;
+    if((resp=(((int)(dato2->cantArb / (double)(*(size_t*)(dato2->versatil)))*SIG_FIGURES)) - ((int)((dato1->cantArb / (double)(*(size_t*)(dato1->versatil)))*SIG_FIGURES))) == 0)
         return strcmp(dato1->nombre, dato2->nombre);
-    return (resp<0 ? -1 : 1);
+    return resp;
 }
 
 void ordenCant(valoresADT datos){
