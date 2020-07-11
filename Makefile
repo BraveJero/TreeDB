@@ -13,6 +13,7 @@ all: BUE VAN
 ## Vimos que esto es algo particular de Makefile, lo preguntamos una vez 	
 
 debug: COMPILER+=$(DEBUG_COMPILER)
+debug: all
 
 VAN: OUTPUT_FILE=arbolesADTVAN
 VAN: FLAG_CURRENT=-DVAN

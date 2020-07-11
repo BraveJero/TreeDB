@@ -5,7 +5,7 @@
 #include "desarrollo-tads/valoresADT.h"
 #define MAX_CHAR 250
 #define DELIM ";"
-#define FREE freeValores(arboles); freeValores(barrios);
+#define FREE freeValores(arboles); freeValores(barrios);  //Libera todos los recursos ocupados.
 
 #ifdef VAN
 
