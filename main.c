@@ -95,7 +95,7 @@ int main(int argc, char const *argv[]){
       FREE
       exit(1);
     }
-    fprintf(query2, "%s;%g\n", nombre, ((int)((cant/(double)hab)*SIG_FIGURES)/(float)SIG_FIGURES));
+    fprintf(query2, "%s;%.2f\n", nombre, ((int)((cant/(double)hab)*SIG_FIGURES)/(float)SIG_FIGURES));
     free(nombre); // Recordamos que la funcion nextCant guarda una COPIA, por lo que es necesario liberar ese espacio.
   }
 
@@ -109,7 +109,7 @@ int main(int argc, char const *argv[]){
       FREE
       exit(1);
     }
-    fprintf(query3, "%s;%g\n", especie, ((int)((diamAc/cant)*SIG_FIGURES))/(float)SIG_FIGURES);
+    fprintf(query3, "%s;%.2f\n", especie, ((int)((diamAc/cant)*SIG_FIGURES))/(float)SIG_FIGURES);
     free(especie); // Recordamos que la funcion nextArbol guarda una COPIA, por lo que es necesario liberar ese espacio.
   }
 
