@@ -5,7 +5,6 @@
 #include "desarrollo-tads/valoresADT.h"
 #define MAX_CHAR 250
 #define DELIM ";"
-#define SIG_FIGURES 100 // 10 ^ n donde n es la cantidad de sifras significativas deseadas.
 #define FREE freeValores(arboles); freeValores(barrios);
 
 #ifdef VAN

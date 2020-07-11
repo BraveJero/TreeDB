@@ -6,6 +6,8 @@
 
 typedef struct valoresCDT * valoresADT;
 
+#define SIG_FIGURES 100 // 10 ^ n donde n es la cantidad de sifras significativas deseadas para el orden de los datos.
+
 // Crea un CDT vacio.
 valoresADT newValores(void);
 

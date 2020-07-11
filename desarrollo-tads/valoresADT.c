@@ -7,7 +7,6 @@
 #define BARRIO 0
 #define CANT 1
 #define ARBOL 2
-#define SIG_FIGURES 100 // 10 ^ n donde n es la cantidad de sifras significativas deseadas.
 
 typedef struct tDato{
   char * nombre; // Nombre del barrio o arbol
