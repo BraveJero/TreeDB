@@ -8,9 +8,9 @@ Para generar ambos ejecutables, desde la terminal ejecutar el comando "make" en 
 Los posibles ejecutables que se crearán tendrán los nombres "arbolesADTBUE" y "arbolesADTVAN". 
 
 Para correr el programa, desde la terminal ejecutar el programa creado anteriormente, agregando los argumentos de línea de comando que correspondan a:
-  - El archivo que contiene a los árboles de la ciudad (Primer argumento). 
-  - El archivo que contiene los barrios de la ciudad (Segundo argumento).
-Por ejemplo, para Buenos Aires: "$./arbolesADTBUE ./arbolesBUE.csv ./barriosBUE.csv".
+  - El path al archivo que contiene a los árboles de la ciudad (Primer argumento). 
+  - El path al archivo que contiene los barrios de la ciudad (Segundo argumento).
+Por ejemplo, para Buenos Aires: "$./arbolesADTBUE ./base-datos/arbolesBUE.csv ./base-datos/barriosBUE.csv".
 
 Para Buenos Aires, el ejecutable está configurado para que los datos se encuentren en cada archivo de la forma:
   - barriosBUE.csv:
@@ -18,8 +18,8 @@ Para Buenos Aires, el ejecutable está configurado para que los datos se encuent
     * "habitantes" en la columna 2.
   - arbolesBUE.csv: 
     * "comuna" en la columna 3.
-    * "nombre_cientifico" la en columna 8.
-    * "diametro_altura_pecho" la en columna 12.
+    * "nombre_cientifico" en la columna 8.
+    * "diametro_altura_pecho" en la columna 12.
    
 Para Vancouver, el ejecutable está configurado para que los datos se encuentren en cada archivo de la forma:
   - barriosVAN.csv:
