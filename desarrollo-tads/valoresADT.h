@@ -1,5 +1,5 @@
-/* Utilizaremos este ADT para almacenar la cantidad de personas
-   y arboles neta que hay por barrio */
+/* Utilizaremos este A.D.T.(Abstract Data Type) para almacenar datos, correspondientes 
+   a los barrios y arboles de una determinada ciudad. */
 
 #ifndef VALORES_H
 #define VALORES_H
@@ -8,7 +8,10 @@ typedef struct valoresCDT * valoresADT;
 
 #define SIG_FIGURES 100 // 10 ^ n donde n es la cantidad de sifras significativas deseadas para el orden de los datos.
 
-// Crea un CDT vacio.
+/* Crea un CDT vacio. 
+** Retorna un puntero al CDT creado.
+** O retorna NULL de no tener suficiente memoria. 
+*/
 valoresADT newValores(void);
 
 // Libera los recursos reservados por el TAD

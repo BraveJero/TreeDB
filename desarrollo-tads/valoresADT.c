@@ -21,13 +21,11 @@ typedef struct valoresCDT{
   size_t max; // Cantidad de valores almacenados
 }valoresCDT;
 
-valoresADT newValores(){
+valoresADT newValores(void){
   errno=0;
   valoresADT nuevo = calloc(1, sizeof(valoresCDT));
-  if(errno==ENOMEM){
-    fprintf(stderr, "Espacio de memoria insuficiente.\n");
+  if(errno==ENOMEM)
     return NULL;
-  }
   return nuevo;
 }
 
@@ -39,11 +37,6 @@ void freeValores(valoresADT datos){
   free(datos->valores);
   free(datos);
   return;
-}
-
-static int oomReturn(void){  //Chequear como hacer esto para que quede mas claro cuando me quedo sin memoria
-  fprintf(stderr, "Espacio de memoria insuficiente.\n");
-  return -1;
 }
 
 static int addDato(valoresADT datos, char * rotulo, void * flex, char type){
@@ -58,26 +51,27 @@ static int addDato(valoresADT datos, char * rotulo, void * flex, char type){
       return 1; //Ya encontre mi palabra, realice los cambios, asi que retorno 1.
     }
   }
+
   if (type == CANT)
     return 0; // Si no encontre mi barrio y queria agregar un arbol a este barrio, retorno 0.
 
-  datos->valores = realloc(datos->valores, sizeof(tDato) * (datos->max + 1)); //Ver de agregar de a BLOCK.
-  if (errno == ENOMEM)
-    return oomReturn();
+  datos->valores = realloc(datos->valores, sizeof(tDato) * (datos->max + 1));
+  if (errno == ENOMEM) //De no tener suficiente espacio retorno -1.
+    return -1;
 
-  datos->valores[datos->max].nombre = malloc((strlen(rotulo) + 1) * sizeof(char));
+  datos->valores[datos->max].nombre = malloc((strlen(rotulo) + 1) * sizeof(char)); //Aloco espacio para una copia de "rotulo".
   if (errno == ENOMEM){
-    datos->valores = realloc(datos->valores, sizeof(tDato) *(datos->max));
-    return oomReturn();
+    datos->valores = realloc(datos->valores, sizeof(tDato) * (datos->max));
+    return -1;
   }
-  strcpy(datos->valores[datos->max].nombre, rotulo);
-  if (type == BARRIO){
+  strcpy(datos->valores[datos->max].nombre, rotulo); //Guardo una copia de "rotulo".
+  if (type == BARRIO){   //De estar agregando un barrio, los datos de mi CDT seran distintos que si agrego un arbol.
     datos->valores[datos->max].cantArb = 0;
     datos->valores[datos->max].versatil = malloc(sizeof(size_t));
-    if (errno == ENOMEM){
+    if (errno == ENOMEM){    /* Ver fin del codigo (1)*/
       free(datos->valores[datos->max].nombre);
       datos->valores = realloc(datos->valores, sizeof(tDato) * (datos->max));
-      return oomReturn();
+      return -1;
     }
     *(size_t*)(datos->valores[datos->max].versatil) = *(size_t*)flex;
   }else {
@@ -86,12 +80,12 @@ static int addDato(valoresADT datos, char * rotulo, void * flex, char type){
     if (errno == ENOMEM){
       free(datos->valores[datos->max].nombre);
       datos->valores = realloc(datos->valores, sizeof(tDato) * (datos->max));
-      return oomReturn();
+      return -1;
     }
     *(double*)(datos->valores[datos->max].versatil) = *(double*)flex;
   }
   datos->max++;
-  return 1;
+  return 1; //Todo salio correctamente, entonces retorno 1.
 }
 
 int addBarrio(valoresADT datos, char * nombre, size_t cant){
@@ -105,6 +99,8 @@ int addArbol(valoresADT datos, char * nombre, double diam){
 int addCant(valoresADT datos, char * nombre){
   return addDato(datos, nombre, NULL, CANT);
 }
+
+//Utilizamos la funcion de la libreria estandard 'stdlib.h' 'qsort()'.
 
 static int comparaBarrio(tDato * dato1, tDato * dato2){
     int resp;
@@ -155,9 +151,9 @@ static int next(valoresADT datos, char ** nombre, size_t * cantArb, void * flex,
   if (!hasNext(datos))
     return 0;
   errno=0;
-  *nombre = malloc(sizeof(char) * (strlen(datos->valores[datos->current].nombre) + 1));
+  *nombre = malloc(sizeof(char) * (strlen(datos->valores[datos->current].nombre) + 1)); //Aloco espacio ya que guardare una copia de 'nombre'.
   if (errno == ENOMEM)
-    return oomReturn();
+    return -1;
   strcpy(*nombre, datos->valores[datos->current].nombre);
   *cantArb = datos->valores[datos->current].cantArb;
   if (type == ARBOL)
@@ -180,4 +176,8 @@ int nextCant(valoresADT datos, char ** nombre, size_t * cantArb, size_t * hab){
   return next(datos, nombre, cantArb, hab, CANT);
 }
 
-// Fiu, mucho texto ;D
+/* (1): Esta validacion se repite abajo. Pero de sacarla del if, 
+        tendriamos que preguntar nuevamente que estoy agregando para 
+        poder desreferenciar 'void *'. 
+        Entonces nos parecio mejor repetir estas 5 lineas de codigo 
+        que hacer una comparacion mas. */

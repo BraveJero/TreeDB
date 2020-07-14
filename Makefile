@@ -27,5 +27,8 @@ mainVAN.o: main.c
 	$(COMPILER) -c $(FLAGS) $(FLAG_CURRENT) main.c desarrollo-tads/valoresADT.c
 
 clean: 
-	rm -rf $(OUTPUT_FILE) *.o $(QUERYS)
+	rm -rf $(OUTPUT_FILE) *.o
+
+cleanQuerys:
+	rm -f $(QUERYS)
 
