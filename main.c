@@ -43,19 +43,24 @@ int main(int argc, char const *argv[]){
   FILE * query3 = fopen("query3.csv", "wt");
   size_t cant_files = QUERYS + argc - 1;
   FILE * files[] = {barriosFile, arbolesFile, query1, query2, query3};
-  if (errno==ENOENT)
+  if (errno==ENOENT){
     closeFiles(files, cant_files);  //De no poder abrir un archivo cierro todos los que pude abrir.
+    fprintf(stderr, "No se pudo abrir un archivo.\n");
+    exit(1);
+  }
 
   char aux[MAX_CHAR], * nombre, * habitantes, * diametro, * especie, * tok;  //Punteros auxiliares.
   valoresADT barrios = newValores(); // Aca alamacenamos barrios y sus respectiva cantidad de arboles y habitantes
   if (barrios==NULL){
     fprintf(stderr, "No hay memoria suficiente para almacenar los datos.\n"); //Aviso que me quede sin memoria.
+    closeFiles(files, cant_files);
     exit(1); //Corto el programa.
   }
   valoresADT arboles = newValores(); // Aca almacenamos arboles y sus respectivos diametros y cantidad
   if (arboles==NULL){
     freeValores(barrios);
     fprintf(stderr, "No hay memoria suficiente para almacenar los datos.\n"); //Aviso que me quede sin memoria.
+    closeFiles(files, cant_files);
     exit(1); //Corto el programa.
   }
 
@@ -139,7 +144,8 @@ int main(int argc, char const *argv[]){
 }
 
 void outOfMemmory(valoresADT arboles, valoresADT barrios, FILE * files[], size_t cant_files){
-  freeValores(arboles); freeValores(barrios);  //Libera todos los recursos ocupados.
+  freeValores(arboles); 
+  freeValores(barrios);  //Libera todos los recursos ocupados.
   fprintf(stderr, "No hay memoria suficiente para almacenar los datos.\n"); //Aviso que me quede sin memoria.
   closeFiles(files, cant_files);
   exit(1);
