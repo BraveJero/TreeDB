@@ -5,7 +5,9 @@ Para generar ambos ejecutables, desde la terminal ejecutar el comando "make" en 
   - En caso de querer debugear el programa, correr "make debug" y se crearán ambos ejecutables,
     pero compilando el programa con los flags: "-Wall -fsanitize=address -Wuninitialized -g". 
 
-Para borrar todos los archivos objeto del directorio, correr el comando "make clean".
+Para borrar todos los archivos objeto del directorio y los ejecutables, correr el comando "make clean".
+  - En caso de querer borrar solo el ejecutable de VAN y los archivos objeto, correr el comando "make cleanVAN" .
+  - De querer borrar solo el ejecutable de BUE y los archivos objeto, correr "make cleanBUE".
 
 En caso de querer eliminar las querys, correr el comando "make cleanQuerys".
 

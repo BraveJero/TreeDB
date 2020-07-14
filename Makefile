@@ -26,8 +26,14 @@ mainBUE.o: main.c
 mainVAN.o: main.c
 	$(COMPILER) -c $(FLAGS) $(FLAG_CURRENT) main.c desarrollo-tads/valoresADT.c
 
-clean: 
-	rm -rf $(OUTPUT_FILE) *.o
+clean:
+	rm -rf arbolesADTBUE arbolesADTVAN *.o
+
+cleanVAN: 
+	rm -rf arbolesADTVAN *.o
+
+cleanBUE:
+	rm -rf arbolesADTBUE *.o
 
 cleanQuerys:
 	rm -f $(QUERYS)
