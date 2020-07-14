@@ -114,7 +114,7 @@ int main(int argc, char const *argv[]){
   }
 
   /*------------- Resolucion de la Query 2 -------------*/
-  fprintf(query2, "BARRIOS;ARBOLES_POR_HABITANTE\n");
+  fprintf(query2, "BARRIO;ARBOLES_POR_HABITANTE\n");
   ordenCant(barrios);
   size_t hab;
   toBegin(barrios);
