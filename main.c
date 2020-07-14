@@ -37,7 +37,7 @@ int main(int argc, char const *argv[]){
   }
   errno = 0;
   FILE * barriosFile = fopen(argv[2], "r");
-  FILE * arbolesFile = fopen(argv[1], "r");  //To-Do ver si se abrio bien el archivo.
+  FILE * arbolesFile = fopen(argv[1], "r");
   FILE * query1 = fopen("query1.csv", "wt");
   FILE * query2 = fopen("query2.csv", "wt");
   FILE * query3 = fopen("query3.csv", "wt");
@@ -114,7 +114,7 @@ int main(int argc, char const *argv[]){
   }
 
   /*------------- Resolucion de la Query 2 -------------*/
-  fprintf(query2, "BARRIO;ARBOLES_POR_HABITANTE\n");
+  fprintf(query2, "BARRIOS;ARBOLES_POR_HABITANTE\n");
   ordenCant(barrios);
   size_t hab;
   toBegin(barrios);
