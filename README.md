@@ -5,6 +5,10 @@ Para generar ambos ejecutables, desde la terminal ejecutar el comando "make" en 
   - En caso de querer debugear el programa, correr "make debug" y se crearán ambos ejecutables,
     pero compilando el programa con los flags: "-Wall -fsanitize=address -Wuninitialized -g". 
 
+Para borrar todos los archivos objeto del directorio, correr el comando "make clean".
+
+En caso de querer eliminar las querys, correr el comando "make cleanQuerys".
+
 Los posibles ejecutables que se crearán tendrán los nombres "arbolesADTBUE" y "arbolesADTVAN". 
 
 Para correr el programa, desde la terminal ejecutar el programa creado anteriormente, agregando los argumentos de línea de comando que correspondan a:
