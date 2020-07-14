@@ -56,13 +56,13 @@ static int addDato(valoresADT datos, char * rotulo, void * flex, char type){
     return 0; // Si no encontre mi barrio y queria agregar un arbol a este barrio, retorno 0.
 
   datos->valores = realloc(datos->valores, sizeof(tDato) * (datos->max + 1));
-  if (errno == ENOMEM) //De no tener suficiente espacio retorno -1.
-    return -1;
+  if (errno == ENOMEM) //De no tener suficiente espacio retorno OOMEM.
+    return OOMEM;
 
   datos->valores[datos->max].nombre = malloc((strlen(rotulo) + 1) * sizeof(char)); //Aloco espacio para una copia de "rotulo".
   if (errno == ENOMEM){
     datos->valores = realloc(datos->valores, sizeof(tDato) * (datos->max));
-    return -1;
+    return OOMEM;
   }
   strcpy(datos->valores[datos->max].nombre, rotulo); //Guardo una copia de "rotulo".
   if (type == BARRIO){   //De estar agregando un barrio, los datos de mi CDT seran distintos que si agrego un arbol.
@@ -71,7 +71,7 @@ static int addDato(valoresADT datos, char * rotulo, void * flex, char type){
     if (errno == ENOMEM){    /* Ver fin del codigo (1)*/
       free(datos->valores[datos->max].nombre);
       datos->valores = realloc(datos->valores, sizeof(tDato) * (datos->max));
-      return -1;
+      return OOMEM;
     }
     *(size_t*)(datos->valores[datos->max].versatil) = *(size_t*)flex;
   }else {
@@ -80,7 +80,7 @@ static int addDato(valoresADT datos, char * rotulo, void * flex, char type){
     if (errno == ENOMEM){
       free(datos->valores[datos->max].nombre);
       datos->valores = realloc(datos->valores, sizeof(tDato) * (datos->max));
-      return -1;
+      return OOMEM;
     }
     *(double*)(datos->valores[datos->max].versatil) = *(double*)flex;
   }
@@ -153,7 +153,7 @@ static int next(valoresADT datos, char ** nombre, size_t * cantArb, void * flex,
   errno=0;
   *nombre = malloc(sizeof(char) * (strlen(datos->valores[datos->current].nombre) + 1)); //Aloco espacio ya que guardare una copia de 'nombre'.
   if (errno == ENOMEM)
-    return -1;
+    return OOMEM;
   strcpy(*nombre, datos->valores[datos->current].nombre);
   *cantArb = datos->valores[datos->current].cantArb;
   if (type == ARBOL)

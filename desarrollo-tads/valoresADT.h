@@ -6,7 +6,11 @@
 
 typedef struct valoresCDT * valoresADT;
 
-#define SIG_FIGURES 100 // 10 ^ n donde n es la cantidad de sifras significativas deseadas para el orden de los datos.
+// 10 ^ n donde n es la cantidad de sifras significativas deseadas para el orden de los datos.
+#define SIG_FIGURES 100 
+
+//Constante simbolica que representa que se acabo la memoria.
+#define OOMEM -1  
 
 /* Crea un CDT vacio. 
 ** Retorna un puntero al CDT creado.
@@ -20,13 +24,13 @@ void freeValores(valoresADT datos);
 /*Agrega un barrio a datos, con su nombre, y cantidad de hab.
 ** Retorna 1 se se agrego correctamente.
 ** 0 si se trato de agregar un barrio repetido.
-** -1 si la memoria no alcanzo.
+** OOMEM si la memoria no alcanzo.
 */
 int addBarrio(valoresADT datos, char * nombre, size_t cant);
 
 /*Agrega un arbol a datos, con su nombre y diametro AP.
 ** Retorna 1 se se agrego correctamente.
-** -1 si la memoria no alcanzo.
+** OOMEM si la memoria no alcanzo.
 */
 int addArbol(valoresADT datos, char * nombre, double diam);
 
@@ -53,19 +57,19 @@ int hasNext(valoresADT datos);
 
 /* Devuelve los datos del barrio actual (nombre, cantidad de arboles, cantidad de habitantes).
 ** Retorna 1 si se pudieron devolver los datos.
-** Al guardar una COPIA de "nombre", retorna -1 si la memoria no alcanzo.
+** Al guardar una COPIA de "nombre", retorna OOMEM si la memoria no alcanzo.
 ** 0 si no hay mas datos. */
 int nextCant(valoresADT datos, char ** nombre, size_t * cantArb, size_t * hab);
 
 /* Devuelve los datos del barrio actual (nombre, cantidad de arboles).
 ** Retorna 1 si se pudieron devolver los datos.
-** Al guardar una COPIA de "nombre", retorna -1 si la memoria no alcanzo.
+** Al guardar una COPIA de "nombre", retorna OOMEM si la memoria no alcanzo.
 ** 0 si no hay mas datos. */
 int nextBarrio(valoresADT datos, char ** nombre, size_t * cantArb);
 
 /* Devuelve los datos del arbol actual (nombre, cantidad de arboles de esta especie).
 ** Retorna 1 si se pudieron devolver los datos.
-** Al guardar una COPIA de "nombre", retorna -1 si la memoria no alcanzo.
+** Al guardar una COPIA de "nombre", retorna OOMEM si la memoria no alcanzo.
 ** 0 si no hay mas datos. */
 int nextArbol(valoresADT datos, char ** nombre, size_t * cantArb, double * diamAc);
 

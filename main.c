@@ -70,7 +70,7 @@ int main(int argc, char const *argv[]){
     nombre = strtok(aux, DELIM);
     habitantes = strtok(NULL, DELIM);
     int resp_addBarrio = addBarrio(barrios, nombre, atoi(habitantes));
-    if(resp_addBarrio == -1){ // Si devuelve -1, no hay mas memoria: libera los recursos y exitea.
+    if(resp_addBarrio == OOMEM){ // Si devuelve OOMEM, no hay mas memoria: libera los recursos y exitea.
       outOfMemmory(arboles, barrios, files, cant_files);
     }
     if(resp_addBarrio == 0){
@@ -91,7 +91,7 @@ int main(int argc, char const *argv[]){
       else if(i == DIAM)
         diametro = tok;
     }
-    if(addArbol(arboles, especie, atof(diametro)) == -1){
+    if(addArbol(arboles, especie, atof(diametro)) == OOMEM){
       outOfMemmory(arboles, barrios, files, cant_files);
     }
     if(addCant(barrios, nombre) == 0){
@@ -106,7 +106,7 @@ int main(int argc, char const *argv[]){
   ordenBarrio(barrios);
   toBegin(barrios);
   while(hasNext(barrios)){
-    if(nextBarrio(barrios, &nombre, &cant) == -1){
+    if(nextBarrio(barrios, &nombre, &cant) == OOMEM){
       outOfMemmory(arboles, barrios, files, cant_files);
     }
     fprintf(query1, "%s;%zu\n", nombre, cant);
@@ -119,7 +119,7 @@ int main(int argc, char const *argv[]){
   size_t hab;
   toBegin(barrios);
   while(hasNext(barrios)){
-    if(nextCant(barrios, &nombre, &cant, &hab) == -1){
+    if(nextCant(barrios, &nombre, &cant, &hab) == OOMEM){
       outOfMemmory(arboles, barrios, files, cant_files);
     }
     fprintf(query2, "%s;%.2f\n", nombre, ((int)((cant/(double)hab)*SIG_FIGURES)/(float)SIG_FIGURES));
@@ -132,7 +132,7 @@ int main(int argc, char const *argv[]){
   toBegin(arboles);
   double diamAc;
   while(hasNext(arboles)){
-    if(nextArbol(arboles, &especie, &cant, &diamAc) == -1){
+    if(nextArbol(arboles, &especie, &cant, &diamAc) == OOMEM){
       outOfMemmory(arboles, barrios, files, cant_files);
     }
     fprintf(query3, "%s;%.2f\n", especie, ((int)((diamAc/cant)*SIG_FIGURES))/(float)SIG_FIGURES);
