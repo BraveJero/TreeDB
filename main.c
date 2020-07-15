@@ -122,7 +122,10 @@ int main(int argc, char const *argv[]){
     if(nextCant(barrios, &nombre, &cant, &hab) == -1){
       outOfMemmory(arboles, barrios, files, cant_files);
     }
-    fprintf(query2, "%s;%.2f\n", nombre, ((int)((cant/(double)hab)*SIG_FIGURES)/(float)SIG_FIGURES));
+    if(hab!=0)
+      fprintf(query2, "%s;%.2f\n", nombre, ((int)((cant/(double)hab)*SIG_FIGURES)/(float)SIG_FIGURES));
+    else 
+      fprintf(query2, "%s;%s\n", nombre, "No tiene habitantes");
     free(nombre); // Recordamos que la funcion nextCant guarda una COPIA, por lo que es necesario liberar ese espacio.
   }
 

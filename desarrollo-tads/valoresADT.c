@@ -128,6 +128,9 @@ void ordenArbol(valoresADT datos){
 
 static int comparaCant(tDato * dato1, tDato * dato2){
     int resp;
+    if((*(size_t*)(dato2->versatil)) == 0 || (*(size_t*)(dato1->versatil)) == 0 ){
+      return (*(size_t*)(dato2->versatil)) - (*(size_t*)(dato1->versatil)); //En el caso que un barrio NO tenga habitantes, lo mando al final.
+    }
     if((resp=(int)((dato2->cantArb / (double)(*(size_t*)(dato2->versatil))) * SIG_FIGURES) - (int)((dato1->cantArb / (double)(*(size_t*)(dato1->versatil)))*SIG_FIGURES)) == 0)
         return strcmp(dato1->nombre, dato2->nombre);
     return resp;
