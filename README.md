@@ -3,7 +3,7 @@
 Para generar ambos ejecutables, desde la terminal ejecutar el comando "make" en el directorio actual. 
   - En caso de querer generar sólo uno correr el comando "make " seguido de la opción deseada ("VAN" o "BUE"). 
   - En caso de querer debugear el programa, correr "make debug" y se crearán ambos ejecutables,
-    pero compilando el programa con los flags: "-Wall -fsanitize=address -Wuninitialized -g". 
+    pero compilando el programa con los flags: "-Wall -fsanitize=address". 
 
 Para borrar todos los archivos objeto del directorio y los ejecutables, correr el comando "make clean".
   - En caso de querer borrar solo el ejecutable de VAN y los archivos objeto, correr el comando "make cleanVAN" .

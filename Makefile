@@ -1,7 +1,7 @@
 COMPILER=gcc
 FLAGS=-pedantic -std=c99
 FLAG_CURRENT=
-DEBUG_COMPILER=-Wall -fsanitize=address -Wuninitialized -g
+DEBUG_COMPILER=-Wall -fsanitize=address
 OUTPUT_FILE_BUE=arbolesADTBUE
 OUTPUT_FILE_VAN=arbolesADTVAN
 QUERYS=query1.csv query2.csv query3.csv 
