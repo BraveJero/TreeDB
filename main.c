@@ -7,6 +7,8 @@
 #define MAX_CHAR 250
 #define DELIM ";"
 #define QUERYS 3
+//Representa la cantidad de columnas a leer
+#define ALEER 3 
 
 #ifdef VAN
 
@@ -33,7 +35,7 @@ void outOfMemmory(valoresADT arboles, valoresADT barrios, FILE * files[], size_t
 int main(int argc, char const *argv[]){
   if( argc != 3 ){
     fprintf(stderr, "Cantidad invalida de parametros.\n");
-    return 1;
+    exit(1);
   }
   errno = 0;
   FILE * barriosFile = fopen(argv[2], "r");
@@ -83,13 +85,17 @@ int main(int argc, char const *argv[]){
   fgets(aux, MAX_CHAR, arbolesFile);
   while(fgets(aux, MAX_CHAR, arbolesFile) != NULL){
     tok = strtok(aux, DELIM);
-    for(int i = 0; tok != NULL; i++, tok = strtok(NULL, DELIM)){
-      if(i == BARRIO)
+    for(int i = 0, read=0; tok != NULL && read < ALEER; i++, tok = strtok(NULL, DELIM)){
+      if(i == BARRIO){
         nombre = tok;
-      else if(i == ARBOL)
+        read++;              //Utilizamos 'read' como flag para dejar de leer cuando ya obtuvimos las columnas deseadas. 
+      } else if(i == ARBOL){
         especie = tok;
-      else if(i == DIAM)
+        read++;
+      } else if(i == DIAM){
         diametro = tok;
+        read++;
+      }
     }
     if(addArbol(arboles, especie, atof(diametro)) == -1){
       outOfMemmory(arboles, barrios, files, cant_files);
