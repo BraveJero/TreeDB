@@ -16,7 +16,8 @@ Los posibles ejecutables que se crearán tendrán los nombres "arbolesADTBUE" y 
 Para correr el programa, desde la terminal ejecutar el programa creado anteriormente, agregando los argumentos de línea de comando que correspondan a:
   - El path al archivo que contiene a los árboles de la ciudad (Primer argumento). 
   - El path al archivo que contiene los barrios de la ciudad (Segundo argumento).
-Por ejemplo, para Buenos Aires: "$./arbolesADTBUE ./base-datos/arbolesBUE.csv ./base-datos/barriosBUE.csv".
+Por ejemplo, para Buenos Aires: "$./arbolesADTBUE ./base-datos/arbolesBUE.csv ./base-datos/barriosBUE.csv". 
+Es indispensable para el correcto funcionamiento del programa que el orden de los archivos sea como aquel del previo ejemplo. 
 
 Para Buenos Aires, el ejecutable está configurado para que los datos se encuentren en cada archivo de la forma:
   - barriosBUE.csv:

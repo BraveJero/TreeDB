@@ -122,10 +122,10 @@ int main(int argc, char const *argv[]){
     if(nextCant(barrios, &nombre, &cant, &hab) == -1){
       outOfMemmory(arboles, barrios, files, cant_files);
     }
-    if(hab!=0)
+    if(hab!=0)  //De tener un barrio sin habitantes, calcular los arboles por habitante es absurdo. Como el query 1 admite un barrio con 0 habitantes. No cortamos el programa.
       fprintf(query2, "%s;%.2f\n", nombre, ((int)((cant/(double)hab)*SIG_FIGURES)/(float)SIG_FIGURES));
     else 
-      fprintf(query2, "%s;%s\n", nombre, "No tiene habitantes");
+      fprintf(query2, "%s;%s\n", nombre, "No tiene habitantes.");
     free(nombre); // Recordamos que la funcion nextCant guarda una COPIA, por lo que es necesario liberar ese espacio.
   }
 
