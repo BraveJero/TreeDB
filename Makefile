@@ -26,7 +26,7 @@ mainVAN.o: main.c
 	$(COMPILER) -c $(FLAGS) $(FLAG_CURRENT) main.c desarrollo-tads/valoresADT.c
 
 clean:
-	rm -rf $(OUTPUT_FILE_BUE) $(OUTPUT_FILE_VAN) arbolesADTVAN *.o
+	rm -rf $(OUTPUT_FILE_BUE) $(OUTPUT_FILE_VAN) *.o
 
 cleanVAN: 
 	rm -rf $(OUTPUT_FILE_VAN) *.o
